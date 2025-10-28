@@ -181,11 +181,12 @@ void loop(void)
   bno.getEvent(&event);
 
   // Send only comma-separated yaw, pitch, roll
-  Serial.print(event.orientation.x);
-  Serial.print(",");
-  Serial.print(event.orientation.y);
-  Serial.print(",");
-  Serial.println(event.orientation.z);
+  //Serial.print("Gyro: ");
+  Serial.print(-event.orientation.y); //X axis
+  Serial.print(", ");
+  Serial.print(event.orientation.z); //Z axis
+  Serial.print(", ");
+  Serial.println(event.orientation.x); // Y axis
 
   delay(100);
 }
