@@ -28,16 +28,21 @@ void setup() {
 
   // 9600 baud is the default rate for the Ultimate GPS
   GPSSerial.begin(9600);
+  Serial.println("GPS test starting... ");
 }
 
 
 void loop() {
   if (Serial.available()) {
     char c = Serial.read();
-    GPSSerial.write(c);
+    GPSSerial.print(c + "LET");
+    
+    //Serial.print("ETTST");
   }
+  //Serial.print("BETWEEN");
+  //Serial.println();
   if (GPSSerial.available()) {
     char c = GPSSerial.read();
-    Serial.write(c);
+    Serial.print(c);
   }
 }

@@ -121,7 +121,7 @@ void setup(void)
 
   while (!Serial) delay(10);  // wait for serial port to open!
 
-  Serial.println("Orientation Sensor Test"); Serial.println("");
+  //Serial.println("Orientation Sensor Test"); Serial.println("");
 
   /* Initialise the sensor */
   if(!bno.begin())
@@ -134,10 +134,10 @@ void setup(void)
   delay(1000);
 
   /* Display some basic information on this sensor */
-  displaySensorDetails();
+  //displaySensorDetails();
 
   /* Optional: Display current status */
-  displaySensorStatus();
+  //displaySensorStatus();
 
   bno.setExtCrystalUse(true);
 }
@@ -148,21 +148,39 @@ void setup(void)
     should go here)
 */
 /**************************************************************************/
-void loop(void)
-{
-  //------------------------------------------------
-  //GYRO FOR IMU
+void loop(void){
+
+  // Orientation (Euler angles)
   sensors_event_t event;
   bno.getEvent(&event);
+  Serial.print("Orientation (Yaw, Pitch, Roll): ");
+  Serial.print(-event.orientation.y); Serial.print(", ");
+  Serial.print(event.orientation.z); Serial.print(", ");
+  Serial.println(event.orientation.x);
 
-  // Send only comma-separated yaw, pitch, roll
-  Serial.print(-event.orientation.y); //X axis
-  Serial.print(", ");
-  Serial.print(event.orientation.z); //Y axis
-  Serial.print(", ");
-  Serial.println(event.orientation.x); //Z axis
+  // Angular velocity (rad/s)
+  imu::Vector<3> gyro = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
+  Serial.print("Angular Velocity (X, Y, Z): ");
+  Serial.print(gyro.x()); Serial.print(", ");
+  Serial.print(gyro.y()); Serial.print(", ");
+  Serial.println(gyro.z());
 
-  delay(5);
-  //------------------------------------------------
+  // Linear acceleration (m/s^2)
+  imu::Vector<3> accel = bno.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
+  Serial.print("Linear Acceleration (X, Y, Z): ");
+  Serial.print(accel.x()); Serial.print(", ");
+  Serial.print(accel.y()); Serial.print(", ");
+  Serial.println(accel.z());
+
+  // Magnetic field (µT)
+  imu::Vector<3> mag = bno.getVector(Adafruit_BNO055::VECTOR_MAGNETOMETER);
+  Serial.print("Magnetic Field (X, Y, Z): ");
+  Serial.print(mag.x()); Serial.print(", ");
+  Serial.print(mag.y()); Serial.print(", ");
+  Serial.println(mag.z());
+
+  Serial.println(); // Blank line between samples
+  delay(100); // Slight delay for readability
+
   
 }
