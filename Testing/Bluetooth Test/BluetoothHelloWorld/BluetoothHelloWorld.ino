@@ -4,7 +4,7 @@ unsigned long lastSend = 0;
 
 void setup() {
   Serial.begin(115200);
-  Serial2.begin(9600);  // Default HC-05 baud rate
+  Serial7.begin(9600);  // Default HC-05 baud rate
   while (!Serial) ;     // Wait for Serial Monitor
 
   Serial.println("=== HC-05 Bluetooth Test ===");
@@ -16,7 +16,7 @@ void loop() {
   // Periodically send test message to Bluetooth
   if (millis() - lastSend >= 5000) {
     lastSend = millis();
-    Serial2.println("Hello from Teensy 4.1!");
+    Serial7.println("Hello from Teensy 4.1!");
     Serial.println("[USB] Sent: Hello from Teensy 4.1!");
   }
 
