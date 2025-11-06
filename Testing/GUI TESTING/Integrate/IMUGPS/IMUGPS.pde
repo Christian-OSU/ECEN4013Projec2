@@ -11,7 +11,7 @@ void setup() {
   pixelDensity(1);
   println(Serial.list());
   size(600, 600, P3D);
-  String portName = "COM9";  // change this if needed
+  String portName = "COM3";  // change this if needed
   try{
     myPort = new Serial(this, portName, 115200);
     myPort.bufferUntil('\n');
