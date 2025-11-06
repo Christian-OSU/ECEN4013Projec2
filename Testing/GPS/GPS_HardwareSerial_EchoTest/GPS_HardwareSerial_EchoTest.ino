@@ -17,7 +17,7 @@
 
 // what's the name of the hardware serial port?
 #define GPSSerial Serial1
-
+int ledPin=2;
 
 void setup() {
   // make this baud rate fast enough to we aren't waiting on it
@@ -29,6 +29,7 @@ void setup() {
   // 9600 baud is the default rate for the Ultimate GPS
   GPSSerial.begin(9600);
   Serial.println("GPS test starting... ");
+  pinMode(ledPin, OUTPUT);
 }
 
 
@@ -45,4 +46,6 @@ void loop() {
     char c = GPSSerial.read();
     Serial.print(c);
   }
+  digitalWrite(ledPin,HIGH);
+
 }
