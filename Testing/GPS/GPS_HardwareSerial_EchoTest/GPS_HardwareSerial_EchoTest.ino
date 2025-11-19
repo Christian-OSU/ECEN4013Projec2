@@ -13,6 +13,9 @@
 //
 // Pick one up today at the Adafruit electronics shop
 // and help support open source hardware & software! -ada
+#include <Adafruit_GPS.h>
+
+Adafruit_GPS gps(&GPSSerial);
 
 
 // what's the name of the hardware serial port?
@@ -46,6 +49,7 @@ void loop() {
     char c = GPSSerial.read();
     Serial.print(c);
   }
+  gps.sendCommand(PGCMD_ANTENNA)
   digitalWrite(ledPin,HIGH);
 
 }

@@ -5,6 +5,7 @@
 #include <Adafruit_GPS.h>
 
 #define GPSSerial Serial1
+Adafruit_GPS GPS(&GPSSerial);
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire1);
 
 void setup(void)
@@ -56,17 +57,35 @@ void loop(void){
   Serial.print(mag.y()); Serial.print(", ");
   Serial.println(mag.z());
 
-  Serial.println(); // Blank line between samples
   delay(100); // Slight delay for readability
 //GPS ___________________________________________________________________________________
-    while (Serial.available()) {
+   
+   GPS.read();
+if (GPS.newNMEAreceived()) {
+  if (GPS.parse(GPS.lastNMEA())) {
+    // Only runs when a full sentence is parsed
+    Serial.print("Time: ");
+    Serial.print(GPS.hour); Serial.print(":");
+    Serial.print(GPS.minute); Serial.print(":");
+    Serial.println(GPS.seconds);
+
+    Serial.print("Fix: "); Serial.println((int)GPS.fix);
+    Serial.print("Satellites: "); Serial.println((int)GPS.satellites);
+    Serial.print("Latitude: "); Serial.println(GPS.latitude, 6);
+    Serial.print("Longitude: "); Serial.println(GPS.longitude, 6);
+  }
+}
+
+
+   
+    /*while (Serial.available()) {
     char c = Serial.read();
     GPSSerial.write(c);
-    Serial.println();
   }
   while (GPSSerial.available()) {
     char c = GPSSerial.read();
     Serial.write(c);
-    Serial.println();
   }
+    Serial.println(); // Blank line between samples*/
+
 }
