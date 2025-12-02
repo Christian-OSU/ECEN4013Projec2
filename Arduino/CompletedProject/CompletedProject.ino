@@ -13,7 +13,7 @@
 #define SD_CS_PIN BUILTIN_SDCARD
 
 Adafruit_GPS GPS(&GPSSerial);
-Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire1);
+Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x6a, &Wire1);
 IntervalTimer gpsTimer;
 File dataFile;
 
