@@ -2,7 +2,7 @@
 Project 2 for ECEN 4013
 
 
-Upload 11_30Simple to Teensy 4.1
+Upload Date_Time to Teensy 4.1
 
 Run GUI.py for serial reading
 For Bluetooth, use preferred method (I used my phone, you can setup a terminal to read it) (if you have android, I can upload .apk you can install)
